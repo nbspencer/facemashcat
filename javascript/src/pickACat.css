@@ -1,0 +1,23 @@
+.container-cats{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.container-cats > * {
+    max-width: 300px;
+}
+
+.catLeft:hover{
+    opacity: 0.3;
+    cursor: pointer;
+}
+.catRight:hover{
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+}
