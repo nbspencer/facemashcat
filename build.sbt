@@ -3,7 +3,9 @@ organization := "com.example"
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file("."))
+  .enablePlugins(PlayScala)
+
 
 scalaVersion := "2.13.0"
 
@@ -17,6 +19,8 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   "org.playframework.anorm" %% "anorm-postgres" % "2.6.4"
 )
+
+
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
 
