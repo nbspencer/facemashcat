@@ -11,8 +11,8 @@ module.exports = {
             build: path.resolve(App, 'src/index.js')
         },
     output: {
-        filename: '[name].[hash].js',
-        path: path.resolve(App, '/dist')
+        filename: '[name].js',
+        path: path.resolve(App, '../public/react')
     },
     module: {
         rules: [
@@ -31,24 +31,29 @@ module.exports = {
                 ]
             }
             ,
-            {test: /\.gif$/, loader: "url-loader?limit=1&name=[name]/[hash].[ext]"},
-            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[hash].[ext]"},
+            {test: /\.gif$/, loader: "url-loader?limit=1&name=[name]/.[ext]"},
+            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[name].[ext]"},
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[name]/[hash].[ext]"
+                loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[name]/[name].[ext]"
             },
-            {test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[hash].[ext]"},
-            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[hash].[ext]"},
-            {test: /\.gif$/, loader: "url-loader?limit=1&name=[name]/[hash].[ext]"},
-            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[hash].[ext]"},
-            {test: /\.png$/, loader: "url-loader?limit=1&name=[name]/[hash].[ext]"},
+            {test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[name].[ext]"},
+            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[name].[ext]"},
+            {test: /\.gif$/, loader: "url-loader?limit=1&name=[name]/[name].[ext]"},
+            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=1&name=[name]/[name].[ext]"},
+            {test: /\.png$/, loader: "url-loader?limit=1&name=[name]/[name].[ext]"},
         ]
     },
     devServer:{
       proxy:{
-          "/api":"http://192.168.86.28:9000"
+          "/api":"http://localhost:9000"
       },
-        port: 8080
+        disableHostCheck: true,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+        }
     },
     plugins: [
         new HWP(
@@ -59,7 +64,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: "[name].[hash].css",
+            filename: "[name].css",
             chunkFilename: "[id].css"
         }),
     ]

@@ -98,3 +98,4 @@ server.pid
 /dist/
 .cache
 
+/public/react

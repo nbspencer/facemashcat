@@ -10,8 +10,9 @@
     "url-loader": "^2.0.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --port 8080 --host 0.0.0.0",
-    "build": "webpack --mode production",
+    "start_old": "webpack-dev-server --port 8080 --host 0.0.0.0",
+    "start": "webpack --watch --mode development ",
+    "build": "rimraf ../public/react && mkdir -p ../public/react && webpack --mode production ",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
