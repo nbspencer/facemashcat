@@ -17,12 +17,14 @@ export const SubmitCatForm = () => {
         e.preventDefault();
         submitCat(cat)
             .then(response => {
-                console.log(response);
+                if(response.status >= 200 && response.status < 300) {
+                    alert("Création réussi")
+                    setCat({
+                        name :"",
+                        image :""
+                    })
+                }
             })
-        setCat({
-            name :"",
-            image :""
-        })
     }
 
     const onChange = (e) => {
@@ -84,11 +86,17 @@ export const SubmitCatForm = () => {
                     name="name"
                     type="text"
                     onChange={onChange}
+                    value={cat.nom}
                 />
                 </label>
                 <br/>
                 <label>My picture
-                     <input type="file" name="image" accept="image/*" onChange={handleImage}/>
+                     <input type="file"
+                            name="image"
+                            accept="image/*"
+                            onChange={handleImage}
+                            value={cat.image}
+                     />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
