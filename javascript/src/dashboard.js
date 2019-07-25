@@ -8,7 +8,6 @@ export const Dashboard = () => {
     useEffect(() => {
         getCats()
         .then(response => {
-            console.log(response)
             setCats(response.sort(function(a, b){return b.counter-a.counter}));
         })
     }, [])

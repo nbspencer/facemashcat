@@ -12,7 +12,7 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <h1 className="title">Welcome to FACEMASHCAT</h1>
+                <h1 className="title">Welcome to FACEMASHCAT !</h1>
                 <div className="menu">
                     <div className="menu-item">
                         <Link to="/">
