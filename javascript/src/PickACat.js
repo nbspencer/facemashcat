@@ -53,7 +53,7 @@ export const PickACat = () => {
                      src={catLeft.image}
                      className="img"
                 />
-                <p>{catLeft.nom}</p>
+                <p>{catLeft.name}</p>
             </div>
             <div>
                 <p>Ou</p>
@@ -63,7 +63,7 @@ export const PickACat = () => {
                      src={catRight.image}
                      className="img"
                 />
-                <p>{catRight.nom}</p>
+                <p>{catRight.name}</p>
             </div>
         </div>
         </div>

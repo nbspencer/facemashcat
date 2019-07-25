@@ -7,8 +7,11 @@
 
 POST    /api/cats/pick              controllers.CatsController.pickOneExceptThose
 POST    /api/cats/increment         controllers.CatsController.incrementCounter
+POST    /api/cats                   controllers.CatsController.addCat
 GET     /api/cats                   controllers.CatsController.findAll
-GET     /                           controllers.HomeController.index
-
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /                           controllers.HomeController.index
+GET     /*path                      controllers.HomeController.indexWithPath(path)
+
+

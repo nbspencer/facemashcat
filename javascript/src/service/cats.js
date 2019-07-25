@@ -21,6 +21,20 @@ export const pickACat = (ids) => {
         .then(response => response.json());
 }
 
+export const submitCat = (cat) => {
+    const url = "/api/cats";
+    return fetch(url,
+        {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cat)
+        })
+        .then(response => response.json());
+}
+
 export const incrementACat = (cat) => {
     const url = "/api/cats/increment";
     return fetch(url,

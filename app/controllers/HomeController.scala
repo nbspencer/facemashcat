@@ -20,4 +20,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index())
   }
 
+  def indexWithPath(path: String) = index
+
 }

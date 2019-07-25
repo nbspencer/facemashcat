@@ -7,6 +7,7 @@ import postgresql._
 import javax.inject._
 import model.Cat
 import play.api.db._
+import anorm.SqlParser.scalar
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Random
@@ -16,6 +17,7 @@ class CatService @Inject()
 (implicit
  ec: ExecutionContext,
  db: Database) {
+
   val parser: RowParser[Cat] = Macro.namedParser[Cat]
 
   def findAll(): Future[List[Cat]] = {
@@ -47,14 +49,29 @@ class CatService @Inject()
     )
   }
 
-  def findAllByIds(catsIds : List[Long]):Future[List[Cat]] = {
+  def add(name: String, image: String): Future[Either[String,Cat]] = {
     Future.successful(
       db.withConnection { implicit con: Connection =>
-        if(catsIds.isEmpty){
-          SQL(s"select * from cat").as(parser.*)
+        val id = SQL(" INSERT into cat(name,image,counter)" +
+          s" values('$name', '$image', 0)").executeInsert(scalar[Long].singleOpt)
+        if(id.nonEmpty){
+          Right(Cat(id.get,name,image,0))
         }else{
+          Left("probleme lors de la création")
+        }
+
+      }
+    )
+  }
+
+  def findAllByIds(catsIds: List[Long]): Future[List[Cat]] = {
+    Future.successful(
+      db.withConnection { implicit con: Connection =>
+        if (catsIds.isEmpty) {
+          SQL(s"select * from cat").as(parser.*)
+        } else {
           val stringQuery: String = catsIds
-            .map(catId => s"and id != $catId" )
+            .map(catId => s"and id != $catId")
             .mkString(" ")
           SQL(s"select * " +
             s" from cat " +
@@ -63,13 +80,14 @@ class CatService @Inject()
         }
       })
   }
-  def pickOneExceptThose(catsIds : List[Long]): Future[Cat] ={
-    findAllByIds(catsIds).map{ cats =>
-      getRandomElement(cats,new Random)
+
+  def pickOneExceptThose(catsIds: List[Long]): Future[Cat] = {
+    findAllByIds(catsIds).map { cats =>
+      getRandomElement(cats, new Random)
     }
   }
 
-  def getRandomElement(cats : List[Cat], random: Random): Cat = {
+  def getRandomElement(cats: List[Cat], random: Random): Cat = {
     cats(random.nextInt(cats.length))
   }
 }

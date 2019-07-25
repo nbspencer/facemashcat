@@ -51,4 +51,18 @@ class CatsController @Inject()
   }
 
 
+  def addCat() = Action.async(parse.json(10 * 1024 * 1024)) { request =>
+
+    val name =  (request.body \ "name").as[String]
+    val image =  (request.body \ "image").as[String]
+
+    catsService.add(name,image).map{
+      case Right(cat) => {
+        Ok(Cat.writer.writes(cat))
+      }
+      case Left(error) => {
+        BadRequest(s"probleme dans la requete : $error")
+      }
+    }
+  }
 }

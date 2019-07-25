@@ -8,16 +8,26 @@
     max-width: 300px;
 }
 
+.container-cats > div {
+    margin: 1em;
+}
+
 .catLeft:hover{
-    opacity: 0.3;
-    cursor: pointer;
 }
 .catRight:hover{
-    opacity: 0.3;
-    cursor: pointer;
 }
 
 .img {
+    padding: 0.5px;
     width: 100%;
     height: auto;
+    border: 0.3em solid #ccc!important;
+    border-radius: 1em;
+
+}
+
+.img:hover {
+    opacity: 0.3;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }

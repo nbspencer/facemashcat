@@ -15,29 +15,29 @@ export const Dashboard = () => {
 
     return (
         <div align="center">
-            <h1>The most beautiful cat</h1>
-            <table>
+            <div className="table-title">
+                <h3>The most beautiful cat</h3>
+            </div>
+            <table className="table-fill">
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>nom</th>
-                    <th>image</th>
-                    <th>counter</th>
+                    <th className="text-left">name</th>
+                    <th className="text-left">image</th>
+                    <th className="text-left">counter</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-hover">
                 {
                     cats && cats.map(cat =>
                         <tr key={cat.id}>
-                            <td>{cat.id}</td>
-                            <td>{cat.nom}</td>
-                            <td>
+                            <td className="text-left">{cat.name}</td>
+                            <td className="text-left">
                                 <img
                                     className="img-table"
                                     src={cat.image}
                                 />
                             </td>
-                            <td>{cat.counter}</td>
+                            <td className="text-left">{cat.counter}</td>
                         </tr>
                     )
                 }
