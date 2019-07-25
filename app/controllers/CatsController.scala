@@ -37,7 +37,6 @@ class CatsController @Inject()
       }
       case JsError(errors) => Future.successful(BadRequest("Probleme dans la requete"))
     }
-
   }
 
   def pickOneExceptThose = Action.async(parse.json) { request =>
