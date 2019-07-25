@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "build": "cd javascript && npm run-script build"
+    "build": "cd javascript && npm install && npm run-script build"
   }
 }
