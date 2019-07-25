@@ -8,7 +8,7 @@ lazy val root = (project in file("."))
 
 
 scalaVersion := "2.13.0"
-
+herokuAppName in Compile := "facemashcat"
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
 libraryDependencies += "org.postgresql" % "postgresql" % "42.2.6"
