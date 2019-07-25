@@ -1,1 +1,5 @@
-{ "engines": { "node": "4.0.0" } }
+{
+  "scripts": {
+    "start": "cd javascript && npm run-script start"
+  }
+}
