@@ -1,5 +1,7 @@
 {
   "scripts": {
     "start": "cd javascript && npm run-script start"
-  }
+  },
+  "engines": { "node": {} }
+
 }
