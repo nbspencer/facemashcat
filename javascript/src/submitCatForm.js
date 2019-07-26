@@ -17,12 +17,15 @@ export const SubmitCatForm = () => {
         e.preventDefault();
         submitCat(cat)
             .then(response => {
-                if (response.status >= 200 && response.status < 300) {
-                    alert("Création réussi")
+                if (response.status === 200) {
+                    alert("Création réussi");
                     setCat({
                         name: "",
                         image: ""
                     })
+                    e.target.reset();
+                }else{
+                    console.log(response)
                 }
             })
     }
@@ -32,7 +35,6 @@ export const SubmitCatForm = () => {
     }
 
     const handleImage = (e) => {
-        let catForm = cat;
         const files = e.currentTarget.files;
         let reader = new FileReader();
         if (files[0] !== undefined) {
@@ -40,8 +42,7 @@ export const SubmitCatForm = () => {
             if (files[0].size <= TAILLE_IMAGE_MAX) {
                 reader.readAsDataURL(files[0]);
                 reader.onload = (e) => {
-                    catForm.image = e.target.result;
-                    setCat(catForm);
+                    cat.image = e.target.result;
                 };
             } else {
                 reader.onload = (e) => {
@@ -60,8 +61,7 @@ export const SubmitCatForm = () => {
                             });
                             reader.readAsDataURL(imgCompress);
                             reader.onload = (e) => {
-                                catForm.image = e.target.result;
-                                setCat(catForm)
+                                cat.image = e.target.result;
                             }
                         }, 'image/jpeg');
                     }
@@ -81,7 +81,6 @@ export const SubmitCatForm = () => {
                         name="name"
                         type="text"
                         onChange={onChange}
-                        value={cat.nom}
                     />
                 </div>
                 <div className="div-input">
@@ -93,7 +92,6 @@ export const SubmitCatForm = () => {
                         accept="image/*"
                         onChange={handleImage}
                     />
-
                 </div>
                 <div >
                 <input type="submit" value="Submit"/>

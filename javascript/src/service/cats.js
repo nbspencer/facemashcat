@@ -32,7 +32,7 @@ export const submitCat = (cat) => {
             },
             body: JSON.stringify(cat)
         })
-        .then(response => response.json());
+        .then(response => response);
 }
 
 export const incrementACat = (cat) => {
