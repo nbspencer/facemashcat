@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/play-java-hello-world-web -Dhttp.port=${PORT}
+web: target/universal/stage/bin/facemashcat -Dhttp.port=${PORT}
