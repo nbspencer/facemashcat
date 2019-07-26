@@ -8,36 +8,32 @@ const WIDTH_IMAGE_RATIO = 1.5;
 
 export const SubmitCatForm = () => {
 
-    const [cat,setCat] = useState({
-        name :"",
-        image :""
+    const [cat, setCat] = useState({
+        name: "",
+        image: ""
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
         submitCat(cat)
             .then(response => {
-                if(response.status >= 200 && response.status < 300) {
+                if (response.status >= 200 && response.status < 300) {
                     alert("Création réussi")
                     setCat({
-                        name :"",
-                        image :""
+                        name: "",
+                        image: ""
                     })
                 }
             })
     }
 
     const onChange = (e) => {
-        let catForm = cat;
-        catForm[e.currentTarget.name] = e.currentTarget.value;
-        setCat(catForm);
+        cat[e.currentTarget.name] = e.currentTarget.value;
     }
 
     const handleImage = (e) => {
         let catForm = cat;
-
         const files = e.currentTarget.files;
-        console.log(files);
         let reader = new FileReader();
         if (files[0] !== undefined) {
             const imageName = files[0].name;
@@ -45,7 +41,6 @@ export const SubmitCatForm = () => {
                 reader.readAsDataURL(files[0]);
                 reader.onload = (e) => {
                     catForm.image = e.target.result;
-                    console.log(e.target.result);
                     setCat(catForm);
                 };
             } else {
@@ -66,7 +61,6 @@ export const SubmitCatForm = () => {
                             reader.readAsDataURL(imgCompress);
                             reader.onload = (e) => {
                                 catForm.image = e.target.result;
-                                console.log(e.target.result);
                                 setCat(catForm)
                             }
                         }, 'image/jpeg');
@@ -75,30 +69,35 @@ export const SubmitCatForm = () => {
                 reader.readAsDataURL(files[0]);
             }
         }
-
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>Name
-                <input
-                    name="name"
-                    type="text"
-                    onChange={onChange}
-                    value={cat.nom}
-                />
-                </label>
-                <br/>
-                <label>My picture
-                     <input type="file"
-                            name="image"
-                            accept="image/*"
-                            onChange={handleImage}
-                            value={cat.image}
-                     />
-                </label>
-                <input type="submit" value="Submit" />
+        <div align="center">
+            <form className="form-cat" onSubmit={handleSubmit}>
+                <div className="div-input">
+                    <label htmlFor="name">Name </label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        onChange={onChange}
+                        value={cat.nom}
+                    />
+                </div>
+                <div className="div-input">
+                    <label htmlFor="image">My picture</label>
+                    <input
+                        id="image"
+                        name="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImage}
+                    />
+
+                </div>
+                <div >
+                <input type="submit" value="Submit"/>
+                </div>
             </form>
         </div>
     )
